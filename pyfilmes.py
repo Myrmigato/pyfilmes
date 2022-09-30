@@ -61,11 +61,27 @@ def deleta_filme(filmes: list[list]) -> None:
     """
     if len(filmes) == 0:
         return
-    indice = int(input('Digite o número do filme a ser deletado: '))
-    indice -= 1
-    del filmes[indice]
-    os.system('cls')
-    print('Filme Deletado com Sucesso!\n')
+
+    while True:
+        indice = input('Digite o número do filme a ser deletado: ')
+        if indice.isdigit():
+            indice = int(indice)
+            indice -= 1
+            if indice >= 0 and indice < len(filmes):
+                del filmes[indice]
+                os.system('cls')
+                print('Filme Deletado com Sucesso!\n')
+                break
+            else:
+                os.system('cls')
+                print('Não existe filme cadastrado no indice digitado.')
+                input('\nPressione Enter para continuar')
+                os.system('cls')
+                continue
+        else:
+            os.system('cls')
+            input('Caractere inválido.\nPressione Enter para continuar')
+            os.system('cls')
 
 def pesquisa_filme(lista_filmes: list[list]) -> None:
     """
