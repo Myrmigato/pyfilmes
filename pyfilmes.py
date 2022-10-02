@@ -81,12 +81,12 @@ def remover(filmes: list[list]) -> None:
 
             os.system('cls')
             print('Não existe filme cadastrado no indice digitado.')
-            input('\nPressione Enter para continuar')
+            input('\n[Enter] Continuar')
             os.system('cls')
 
         else:
             os.system('cls')
-            input('Caractere inválido.\nPressione Enter para continuar')
+            input('Caractere inválido.\n[Enter] Continuar')
             os.system('cls')
 
 def pesquisar(lista_filmes: list[list]) -> None:
@@ -125,7 +125,7 @@ def opcao_exibir(lista_filmes: list[list]) -> None:
 
     os.system('cls')
     exibir(lista_filmes)
-    input('\nPressione Enter para voltar ao menu principal')
+    input('\n[Enter] Menu principal')
 
 def opcao_pesquisar(lista_filmes: list[list]) -> None:
     """
@@ -139,7 +139,7 @@ def opcao_pesquisar(lista_filmes: list[list]) -> None:
         if controle == 0:
             pesquisar(lista_filmes)
 
-        subop = validador_de_entrada('pesquisar')
+        subop = entrada('pesquisar')
         if subop == 1:
             controle = 0
         elif subop == 2:
@@ -163,7 +163,7 @@ def opcao_adicionar(lista_filmes: list[list]) -> None:
             os.system('cls')
             print('Filme Cadastrado com Sucesso!\n')
 
-        subop = validador_de_entrada('cadastrar')
+        subop = entrada('cadastrar')
         if subop == 1:
             controle = 0
 
@@ -188,7 +188,7 @@ def opcao_remover(lista_filmes: list[list]) -> None:
             exibir(lista_filmes)
             remover(lista_filmes)
 
-        subop = validador_de_entrada('deletar')
+        subop = entrada('deletar')
         if subop == 1:
             controle = 0
 
@@ -215,7 +215,7 @@ def opcao_default() -> None:
 
     os.system('cls')
     print('Opção inválida')
-    input('\nPressione Enter para voltar ao menu anterior')
+    input('\n[Enter] Menu Anterior')
 
 def menu(menu_tipo: string) -> None:
     """
@@ -228,39 +228,50 @@ def menu(menu_tipo: string) -> None:
         print(f"{'':*^30s}")
         print(f"{titulo:*^30s}")
         print(f"{'':*^30s}")
-        print('\n\t1 : Catálogo')
-        print('\t2 : Pesquisar')
-        print('\t3 : Cadastrar')
-        print('\t4 : Deletar')
-        print('\t5 : Sair\n')
+        print('\n\t[1] Catálogo')
+        print('\t[2] Pesquisar')
+        print('\t[3] Cadastrar')
+        print('\t[4] Deletar')
+        print('\t[5] Sair\n')
 
     elif menu_tipo == 'pesquisar':
-        print('\n1 : Pesquisar Novamente')
-        print('2 : Menu Inicial\n')
+        print('\n[1] Pesquisar Novamente')
+        print('[2] Menu Inicial\n')
 
     elif menu_tipo == 'cadastrar':
-        print('\n1 : Cadastrar Novo Filme')
-        print('2 : Menu Inicial\n')
+        print('\n[1] Cadastrar Novo Filme')
+        print('[2] Menu Inicial\n')
     elif menu_tipo == 'deletar':
-        print('\n1 : Deletar Novo Filme')
-        print('2 : Menu Inicial\n')
+        print('\n[1] Deletar Novo Filme')
+        print('[2] Menu Inicial\n')
 
-def validador_de_entrada(menu_tipo: string) -> int:
+def entrada(menu_tipo: string) -> int:
     """
-    Verifica se a opcao digitada pelo usuario é um numeral
+    Recebe do usuario a opcao desajada
     """
 
     while True:
+        # Exibe o menu ou submenu ao usuário
         menu(menu_tipo)
 
         opcao = input('Opção: ')
-        if opcao.isdigit():
+
+        if validador(opcao) is True:
             opcao = int(opcao)
             return opcao
 
         os.system('cls')
-        input('Caractere inválido.\nPressione Enter para voltar ao menu anterior')
+        input('Caractere inválido.\n[Enter] Retornar ao menu anterior')
         os.system('cls')
+
+def validador(entrada_usuario: string) -> bool:
+    """
+    Verifica se a opcao digitada é válida
+    """
+    if entrada_usuario.isdigit():
+        return True
+
+    return False
 
 def principal() -> None:
     """
@@ -269,7 +280,7 @@ def principal() -> None:
 
     filmes = carregar_arquivo()
     while True:
-        opcao = validador_de_entrada('principal')
+        opcao = entrada('principal')
 
         if opcao == 1:
             opcao_exibir(filmes)
