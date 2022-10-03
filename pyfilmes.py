@@ -163,7 +163,7 @@ def opcao_adicionar(lista_filmes: list[list]) -> None:
             os.system('cls')
             print('Filme Cadastrado com Sucesso!\n')
 
-        subop = entrada('cadastrar')
+        subop = entrada('adicionar')
         if subop == 1:
             controle = 0
 
@@ -188,7 +188,7 @@ def opcao_remover(lista_filmes: list[list]) -> None:
             exibir(lista_filmes)
             remover(lista_filmes)
 
-        subop = entrada('deletar')
+        subop = entrada('remover')
         if subop == 1:
             controle = 0
 
@@ -238,10 +238,11 @@ def menu(menu_tipo: string) -> None:
         print('\n[1] Pesquisar Novamente')
         print('[2] Menu Inicial\n')
 
-    elif menu_tipo == 'cadastrar':
+    elif menu_tipo == 'adicionar':
         print('\n[1] Cadastrar Novo Filme')
         print('[2] Menu Inicial\n')
-    elif menu_tipo == 'deletar':
+
+    elif menu_tipo == 'remover':
         print('\n[1] Deletar Novo Filme')
         print('[2] Menu Inicial\n')
 
